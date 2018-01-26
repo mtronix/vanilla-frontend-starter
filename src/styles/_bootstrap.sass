@@ -1,0 +1,7 @@
+/* Responsive btn-block */
+@each $bp-name, $bp-size in $grid-breakpoints
+  @include media-breakpoint-down($bp-name)
+    .btn-#{$bp-name}-block
+      margin-bottom: .3rem
+      display: block
+      width: 100%

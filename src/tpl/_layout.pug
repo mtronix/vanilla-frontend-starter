@@ -1,0 +1,21 @@
+extends _root
+
+block title
+  title Vanilla frontend starter
+
+block body
+  .layout
+    .layout__menu.bg-dark
+      block menu
+        include _menu
+
+    .layout__content
+      .layout__wrapper
+        block nav
+          include _nav
+
+        .container-fluid.main-content
+          block content
+
+      block footer
+        include _footer

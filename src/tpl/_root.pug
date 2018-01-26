@@ -1,0 +1,22 @@
+include _mixins
+
+doctype html
+html(lang='pl')
+  head
+    block head
+      meta(charset='UTF-8')
+      meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+      meta(http-equiv='X-UA-Compatible' content='ie=edge')
+
+    block title
+      title #{title}
+
+    block styles
+      each style in htmlWebpackPlugin.files.css
+        link(href=style rel='stylesheet')
+  body
+    block body
+
+    block scripts
+      each script in htmlWebpackPlugin.files.js
+        script(src=script)
