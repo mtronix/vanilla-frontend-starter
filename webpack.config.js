@@ -99,20 +99,20 @@ var config = {
       filename: DEV ? '[name].css' : '[name]-[hash:10].css'
     }),
     ...tools.scanDir(TPL_PATH, /^[^_]+\.pug$/)
-    .map(file => {
-      let relativePath = path.relative(TPL_PATH, file);
-      let relativeDir = path.dirname(relativePath);
+      .map(file => {
+        let relativePath = path.relative(TPL_PATH, file);
+        let relativeDir = path.dirname(relativePath);
 
-      if (relativeDir === '.') relativeDir = '';
+        if (relativeDir === '.') relativeDir = '';
 
-      return new HtmlWebpackPlugin({
-        template: file,
-        filename: relativePath.replace(/\.pug$/, '.html'),
-        publicPath: PUBLIC_PATH,
-        dir: relativeDir,
-        inject: false
+        return new HtmlWebpackPlugin({
+          template: file,
+          filename: relativePath.replace(/\.pug$/, '.html'),
+          publicPath: PUBLIC_PATH,
+          dir: relativeDir,
+          inject: false
+        });
       })
-    })
   ],
   resolve: {
     modules: [
