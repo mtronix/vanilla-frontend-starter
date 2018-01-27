@@ -167,9 +167,10 @@ switch (process.env.NODE_ENV) {
               drop_console: true
             },
             mangle: MINIFY,
-            comments: !MINIFY
-          }
-        })
+            comments: !MINIFY,
+          },
+          extractComments: /(?:^!|@(?:license|preserve))/i
+        }),
       ]
     });
     break;
