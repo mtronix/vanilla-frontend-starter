@@ -5,6 +5,8 @@ Starter for static pages without JS frameworks. Useful for cutting from PSD to H
 
 ## Getting started
 
+Before you use this project you must perform some operations.
+
 ### Installation
 
 First, you must clone git repository from branch **master** (only last commit) typing command:
@@ -12,14 +14,14 @@ First, you must clone git repository from branch **master** (only last commit) t
 git clone --depth 1 https://github.com/mtronix/vanilla-frontend-starter.git
 ```
 
-Then you should run bash script which cleaning repository form unnecessary files:
+Then you should run a bash script that removes the repository from unnecessary files:
 ```
 cd vanilla-frontend-starter && bash ./clean.sh
 ```
-Above script is self destroying, file *clean.sh* will be deleted after run the script.
+Above script is __self destroying__, file *clean.sh* will be deleted after run the script.
 You can run it only once.
 
-After cleanup you can install dependencies from [npm](https://npmjs.org/) and start developing new awesome website
+After cleanup you can install dependencies from [npm](https://npmjs.com/) and start developing new awesome website
 ```
 npm install
 ```
@@ -32,15 +34,20 @@ npm run build
 ```
 Webpack perform some optimalizations, minify js, css and add build hash to every emitted file.
 
-If you want to see unminified html, comments in css and other seful features in stagging environment add *:pretty* suffix to build command:
+If you want to see unminified html, comments in css and other useful features in stagging environment add *:pretty* suffix to build command:
 
 ```
 npm run build:pretty
 ```
 
-### Deployment
+In the current directory a new *dist* folder will be created that contains the finished project.
 
-[Demo](http://vanilla-frontend-starter.github.mtronix.pl)
+### Deployment
+Projects hosted on GitHub may use TravisCI as CI/CD tool.
+Example configuration which build project and deploy on GitHub pages is in *.travis.yml* file.
+
+
+Deployed website is available [here](http://vanilla-frontend-starter.github.mtronix.pl).
 
 ## License
 
