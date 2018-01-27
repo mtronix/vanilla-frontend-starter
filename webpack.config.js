@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
@@ -12,6 +13,7 @@ const tools = require('./tools');
 const SRC_PATH = path.resolve(__dirname, 'src');
 const DEST_PATH = path.resolve(__dirname, 'dist');
 const DEV = process.env.NODE_ENV === 'development';
+const MINIFY = process.env.MINIFY === 'true';
 
 const TPL_PATH = path.resolve(SRC_PATH, 'tpl');
 const PUBLIC_PATH = '/';
@@ -30,16 +32,13 @@ var config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: {
-          presets: ['env']
-        }
+        exclude: /node_modules/
       },
       {
         test: /\.pug$/,
         loader: 'pug-loader',
         options: {
-          pretty: DEV
+          pretty: !MINIFY
         }
       },
       {
@@ -50,12 +49,12 @@ var config = {
             {
               loader: 'css-loader',
               options: {
-                minimize: !DEV,
+                minimize: MINIFY,
                 importLoaders: 1
               }
             },
-            'sass-loader',
-            'postcss-loader'
+            'postcss-loader',
+            'sass-loader'
           ],
           fallback: 'style-loader'
         })
@@ -144,21 +143,31 @@ switch (process.env.NODE_ENV) {
     config = merge(config, {
       plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
+        new LodashModuleReplacementPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'vendor',
+          minChunks: module => module.context && module.context.includes('node_modules')
+        }),
+        new webpack.HashedModuleIdsPlugin({
+          hashFunction: 'sha256',
+          hashDigest: 'hex',
+          hashDigestLength: 5
+        }),
         new OptimizeCssAssetsPlugin({
           cssProcessor: require('cssnano'),
           cssProcessorOptions: {
             discardComments: {
-              removeAll: true
+              removeAll: MINIFY
             }
           }
         }),
         new UglifyJSPlugin({
           uglifyOptions: {
-            compress: !DEV && {
+            compress: MINIFY && {
               drop_console: true
             },
-            mangle: !DEV,
-            comments: false
+            mangle: MINIFY,
+            comments: !MINIFY
           }
         })
       ]

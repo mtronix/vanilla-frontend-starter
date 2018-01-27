@@ -7,15 +7,32 @@ Starter for static pages without JS frameworks. Useful for cutting from PSD to H
 
 ### Installation
 
+First, you must clone git repository from branch **master** (only last commit) typing command:
+```
+git clone --depth 1 https://github.com/mtronix/vanilla-frontend-starter.git
+```
+
+Then you should run bash script which cleaning repository form unnecessary files:
+```
+cd vanilla-frontend-starter && bash ./clean.sh
+```
+Above script is self destroying, file *clean.sh* will be deleted after run the script.
+You can run it only once.
+
+After cleanup you can install dependencies from [npm](https://npmjs.org/) and start developing new awesome website
 ```
 npm install
 ```
 
 ### Building
+To build website you should run below command:
 
 ```
 npm run build
 ```
+Webpack perform some optimalizations, minify js, css and add build hash to every emitted file.
+
+If you want to see unminified html, comments in css and other seful features in stagging environment add *:pretty* suffix to build command:
 
 ```
 npm run build:pretty
