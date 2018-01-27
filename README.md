@@ -43,7 +43,7 @@ npm run build:pretty
 In the current directory a new *dist* folder will be created that contains the finished project.
 
 ### Deployment
-Projects hosted on GitHub may use TravisCI as CI/CD tool.
+Projects hosted on GitHub may use TravisCI as CI/CD tool free of charge.
 Example configuration which build project and deploy on GitHub pages is in *.travis.yml* file.
 
 
