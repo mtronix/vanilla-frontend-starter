@@ -3,6 +3,15 @@
 # Vanilla frontend starter
 Starter for static pages without JS frameworks. Useful for cutting from PSD to HTML or building simple landing pages
 
+
+## Table of contents
+
+- [Getting started](#getting-started)
+- [Installation](#installation)
+- [Building](#building)
+- [Deployment](#deployment)
+- [License](#license)
+
 ## Getting started
 
 Before you use this project you must perform some operations.

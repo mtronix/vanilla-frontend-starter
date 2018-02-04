@@ -42,6 +42,11 @@ var config = {
         }
       },
       {
+        test: /\.hbs$/,
+        loader: 'handlebars-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.(sass|scss)$/,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
@@ -98,7 +103,7 @@ var config = {
     new ExtractTextPlugin({
       filename: DEV ? '[name].css' : '[name]-[hash:10].css'
     }),
-    ...tools.scanDir(TPL_PATH, /^[^_]+\.pug$/)
+    ...tools.scanDir(TPL_PATH, /^[^_]+\.(pug|hbs)$/)
       .map(file => {
         let relativePath = path.relative(TPL_PATH, file);
         let relativeDir = path.dirname(relativePath);
@@ -107,7 +112,7 @@ var config = {
 
         return new HtmlWebpackPlugin({
           template: file,
-          filename: relativePath.replace(/\.pug$/, '.html'),
+          filename: relativePath.replace(/\.(pug|hbs)$/, '.html'),
           publicPath: PUBLIC_PATH,
           dir: relativeDir,
           inject: false
@@ -115,10 +120,6 @@ var config = {
       })
   ],
   resolve: {
-    modules: [
-      path.resolve(__dirname, 'node_modules'),
-      SRC_PATH
-    ],
     alias: {
       '@': SRC_PATH
     }
