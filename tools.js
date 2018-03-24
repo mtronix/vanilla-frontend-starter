@@ -3,14 +3,14 @@ const fs = require('fs');
 
 /**
  * Scans dir recursively with filename filtering
- * @param string dir
- * @param string filter
+ * @param dir
+ * @param filter
  */
 exports.scanDir = (dir, filter) => {
   let results = [];
-  let fullpath = path.resolve(dir);
+  const fullpath = path.resolve(dir);
 
-  let files = fs.readdirSync(dir);
+  const files = fs.readdirSync(dir);
 
   for (let file of files) {
     let filepath = path.resolve(fullpath, file);

@@ -91,7 +91,7 @@ var config = {
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       },
-      'DEV': JSON.stringify(DEV)
+      '__DEV__': JSON.stringify(DEV)
     }),
     new webpack.ProvidePlugin({
       '$': 'jquery',
